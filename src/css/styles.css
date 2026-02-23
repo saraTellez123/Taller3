@@ -1,0 +1,18 @@
+.type.normal { background: #bdbdbd; color: #000; }
+.type.electric { background: #ffd02c; color: #000; }
+.type.fire { background: #ee8130; }
+.type.ground { background: #b38390; }
+.type.rock { background: #e9d45f; color: #000; }
+.type.water { background: #6390f0; }
+.type.grass { background: #7ac74c; }
+.type.bug { background: #729f3f; }
+.type.flying { background: #b3dc7e; }
+.type.ice { background: #98d9ff; color: #000; }
+.type.poison { background: #9e0a72; }
+.type.fairy { background: #ff87db; }
+.type.fighting { background: #d33d33; }
+.type.psychic { background: #aa0080; }
+.type.steel { background: #616161; }
+.type.ghost { background: #313d7e; }
+.type.dark { background: #222222; }
+.type.dragon { background: #3f23bb; }
