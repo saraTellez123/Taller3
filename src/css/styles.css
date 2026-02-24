@@ -1,21 +1,22 @@
 .type.normal { background: #bdbdbd; color: #000; }
 .type.electric { background: #ffd02c; color: #000; }
-.type.fire { background: #ee8130; }
-.type.ground { background: #b38390; }
+.type.fire { background: #ee8130; color: #000; }
+.type.ground { background: #d49fad; color: #000; }
 .type.rock { background: #e9d45f; color: #000; }
-.type.water { background: #6390f0; }
-.type.grass { background: #7ac74c; }
+.type.water { background: #6390f0; color: #000; }
+.type.grass { background: #7ac74c; color: #000;}
 .type.bug { background: #729f3f; }
-.type.flying { background: #b3dc7e; }
+.type.flying { background: #b3dc7e; color: #000;}
 .type.ice { background: #98d9ff; color: #000; }
 .type.poison { background: #9e0a72; }
-.type.fairy { background: #ff87db; }
+.type.fairy { background: #ff87db; color: #000;}
 .type.fighting { background: #d33d33; }
 .type.psychic { background: #aa0080; }
 .type.steel { background: #616161; }
 .type.ghost { background: #313d7e; }
 .type.dark { background: #222222; }
 .type.dragon { background: #3f23bb; }
+
 
 .modal {
   display: flex;
@@ -28,6 +29,7 @@
 
   justify-content: center;
   align-items: center;
+  
 }
 
 .modal-content {
@@ -35,6 +37,7 @@
   padding: 20px;
   border-radius: 10px;
   width: 300px;
+  
 }
 
 .hidden {
@@ -86,26 +89,32 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: 'VT323', monospace;
 
 }
 
 .card{
-    background: #3f23bb;
+    background: url('fondo.png') no-repeat center center;
     width: 380px;
+    height: 453px;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; 
 
 }
 .card img{
-    width: 160px;
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.3s ease;
-    border-radius: 50%;     
-    border: 4px solid white;
-    object-fit: cover; 
+    width: 130px;
+    border-radius: 50%;
+    border: 3px solid rgb(119, 119, 119);
+    background-color: #42414127;
+    object-fit: cover;
+
+    position: absolute;
+    top: 150px;     
+    left: 45%;     
+    transform: translateX(-50%);
 }
 
 .card:hover{
@@ -113,58 +122,128 @@ body{
     box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
+
 #pokemon-name{
-    color: white;
-    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    position: absolute;
+    top: 284px;
+    left: 55%;
+    transform: translateX(-50%);
+    
 }
 #pokemon-id{
     color: white;
-    text-align: center;   
-    font-weight: bold;    
-    font-size: 20px;
+    text-align: center;      
+    font-size: 22px;
+    position: absolute;
+    top: 23px;
+    left: 36%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    padding: 4px;
+    padding-top:2px; 
+    padding-bottom:2px; 
+    border-width: 2px;
+  border-color: #000;
+  border-style: solid;
+  background-color: #ce0202;
 }
 
 .types{
-    text-align: center;
+    text-align: left;
     padding: 10px;
+    position: absolute;
+    top: 337px;
+    left: 32%;
+    transform: translateX(-50%);
+    
 
 
 }
 .types span{
     display: inline-block;
-    background: white;
-    color: #3f23bb;
+    color: white;
     padding: 6px 12px;
     border-radius: 15px;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 14px;
+
     margin: 3px;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #000;
+  border-style: solid;
+  
 }
 
 #prev{
-    font-size: 20px;
-    top: 10px;
-    margin-left: 100px;
+    font-size: 40px;
+    font-weight: 900px;
+    width: 60px;
+    height: 42px;
+    -webkit-text-stroke: 2px black;
 
+    position: absolute;
+    top: 387px;
+    right: 63%;
+    transform: translateX(-50%);
+
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #000;
+    border-style: solid;
+
+    background-color: #036164;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #next{
-    font-size: 20px;
-    top: 10px;
-    right: 10px;
+    font-size: 40px;
+    font-weight: 900px;
+    width: 60px;
+    height: 42px;
+    -webkit-text-stroke: 2px black; /*para el contorno del texto*/
+
+    position: absolute;
+    top: 387px;
+    left: 39%;
+    transform: translateX(-50%);
+    
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #000;
+    border-style: solid;
+    
+    background-color: #036164;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #openModal{
+  font-family: 'VT323', monospace;
   display: block;
   font-size: 20px;
   margin: 15px auto 0;
-  background-color:#ebcc5d;
-
+  background-color:#ffd748;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #000;
+  border-style: solid;
+  position: absolute;
+  top: 50px;
+  left: 67%;
+  transform: translateX(-50%);
+  color: #000000;
     
 }
 
 button{
-    background: white;
-    color: #3f23bb;
-    border: none;
+    
     padding: 10px 20px;
     border-radius: 12px;
     font-weight: bold;
@@ -182,6 +261,7 @@ button:hover{
 button:active{
     transform: scale(0.95);
 }
+
 
 .modal-evolutions {
     margin-top: 20px;

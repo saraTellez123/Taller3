@@ -30,3 +30,4 @@ document.getElementById("openModal").addEventListener("click", () => {
         showModal(currentPokemon);
     }
 });
+
