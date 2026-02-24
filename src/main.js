@@ -7,14 +7,14 @@ let currentPokemon = null;
 
 async function loadPokemon(id) {
     const pokemon = await fetchPokemon(id);
-    currentPokemon = pokemon; 
+    currentPokemon = pokemon; //establece el pokemon
     showPokemon(pokemon);
 }
 
 // Inicial
 loadPokemon(current);
 
-// Navegación
+// Navegacion
 document.querySelector("#next").addEventListener("click", () => {
     current++;
     loadPokemon(current);

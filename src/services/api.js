@@ -1,6 +1,4 @@
 import Pokemon from "../models/pokemon.js";
-
- //"../models/Pokemon.js";
 const API_URL = "https://pokeapi.co/api/v2/pokemon/"
 
 export async function fetchPokemon(id) {

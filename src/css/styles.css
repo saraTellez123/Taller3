@@ -18,7 +18,7 @@
 .type.dragon { background: #3f23bb; }
 
 .modal {
-  display: flex;   /* 👈 importante */
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;

@@ -9,5 +9,4 @@ export default class Pokemon{
         this.abilities = abilities; 
         this.stats= stats;
     }
-
 }
