@@ -42,25 +42,33 @@ export function showModal(pokemon){
         "#" + pokemon.id.toString().padStart(3,"0");
 
     document.getElementById("modal-height").textContent =
-        pokemon.height;
+        (pokemon.height / 10).toFixed(1);
 
     document.getElementById("modal-weight").textContent =
-        pokemon.weight;
+        (pokemon.weight / 10).toFixed(1);
 
     document.getElementById("modal-abilities").textContent =
         pokemon.abilities.join(", ");
 
-    // pintar stats
     const statsDiv = document.getElementById("modal-stats");
-    statsDiv.innerHTML = "";
+    statsDiv.innerHTML = "<h3>Estadísticas</h3>";
 
     pokemon.stats.forEach(s => {
-        const p = document.createElement("p");
-        p.textContent = `${capitalize(s.stat)}: ${s.base}`;
-        statsDiv.appendChild(p);
+
+        const statRow = document.createElement("div");
+        statRow.classList.add("stat-row");
+
+        statRow.innerHTML = `
+            <span class="stat-name">${capitalize(s.stat)}</span>
+            <div class="stat-bar">
+                <div class="stat-fill" style="width: ${s.base / 2}%"></div>
+            </div>
+            <span class="stat-value">${s.base}</span>
+        `;
+
+        statsDiv.appendChild(statRow);
     });
 
-    // abrir modal
     document.getElementById("pokemon-modal")
         .classList.remove("hidden");
 }
