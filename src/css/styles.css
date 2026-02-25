@@ -89,7 +89,7 @@ body{
     align-items: center;
     height: 100vh;
     font-family: 'VT323', monospace;
-
+    background: url('background-pokemon.png') no-repeat center center;
 }
 
 .card{
