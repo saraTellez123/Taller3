@@ -3,10 +3,24 @@ import { fetchEvolutions } from "../services/api.js";
 //Variable global para saber el Pokémon actual
 let currentPokemon = null;
 
+//Detectar si es legendario
+async function isLegendary(name){
+    try{
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}/`);
+        const data = await res.json();
+        return data.is_legendary;
+    }catch(err){
+        console.error(err);
+        return false;
+    }
+}
+
 //Mostrar el pokemon de carta
-export function showPokemon(pokemon){
+export async function showPokemon(pokemon){
     if(!pokemon) return;
     currentPokemon = pokemon;
+
+    const card = document.querySelector(".card");
 
     //Pokemita datos 
     document.getElementById("pokemon-img").src = pokemon.sprite;
@@ -22,6 +36,13 @@ export function showPokemon(pokemon){
         span.textContent = capitalize(t);
         typesDiv.appendChild(span);
     });
+
+    //Aplicar estilo legendario
+    if(await isLegendary(pokemon.name)){
+        card.classList.add("legendary");
+    } else {
+        card.classList.remove("legendary");
+    }
 }
 
 //Mayusculas
@@ -32,7 +53,7 @@ function capitalize(word){
 //Mostrar modal al click en la imagen
 document.querySelector("#pokemon-img").onclick = () => showModal(currentPokemon);
 
-//Ver modal, ver pokemon a detalle
+//Ver modal
 export function showModal(pokemon){
     if(!pokemon) return;
 
@@ -43,7 +64,6 @@ export function showModal(pokemon){
     document.getElementById("modal-weight").textContent = (pokemon.weight / 10).toFixed(1);
     document.getElementById("modal-abilities").textContent = pokemon.abilities.join(", ");
 
-    //stats con sus clases
     const statsDiv = document.getElementById("modal-stats");
     statsDiv.innerHTML = "<h3>Estadísticas</h3>";
     pokemon.stats.forEach(s => {
@@ -59,18 +79,15 @@ export function showModal(pokemon){
         statsDiv.appendChild(statRow);
     });
 
-    //Mostrar modal
     const modal = document.getElementById("pokemon-modal");
     modal.classList.remove("hidden");
 
-    //Toggle de evoluciones
     const toggleBtn = document.getElementById("toggle-evolutions");
     const evolutionsDiv = document.getElementById("modal-evolutions");
 
     toggleBtn.onclick = async () => {
         if (!currentPokemon) return;
 
-        //Si ya está visible, ocultamos
         if(!evolutionsDiv.classList.contains("hidden")){
             evolutionsDiv.classList.add("hidden");
             toggleBtn.textContent = "Ver Evoluciones";
@@ -78,34 +95,67 @@ export function showModal(pokemon){
             return;
         }
 
-        //Mostrar loader
         evolutionsDiv.innerHTML = "<p>Cargando evoluciones...</p>";
         evolutionsDiv.classList.remove("hidden");
         toggleBtn.textContent = "Ocultar Evoluciones";
 
-        //Fetch de evoluciones
         const evolutions = await fetchEvolutions(currentPokemon.name);
 
-        //Si solo tiene uno, no evoluciona
         if(evolutions.length <= 1){
-            evolutionsDiv.innerHTML = "<p>Este Pokémon no tiene evoluciones </p>";
+            evolutionsDiv.innerHTML = "<p>Este Pokémon no tiene evoluciones</p>";
             return;
         }
 
-        //Pintar evoluciones
         evolutionsDiv.innerHTML = "<h3>Evoluciones:</h3>";
+
         evolutions.forEach(evo => {
-            evolutionsDiv.innerHTML += `
-                <div class="evolution-card">
-                    <img src="${evo.sprite}" alt="${evo.name}">
-                    <span>${capitalize(evo.name)}</span>
-                </div>
-            `;
+
+            const card = document.createElement("div");
+            card.classList.add("evolution-card");
+
+            const img = document.createElement("img");
+            img.src = evo.sprite;
+            img.alt = evo.name;
+            img.style.cursor = "pointer";
+
+            img.addEventListener("click", async () => {
+
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${evo.name}`);
+                const data = await res.json();
+
+                const newPokemon = {
+                    id: data.id,
+                    name: data.name,
+                    sprite: data.sprites.front_default,
+                    types: data.types.map(t => t.type.name),
+                    height: data.height,
+                    weight: data.weight,
+                    abilities: data.abilities.map(a => a.ability.name),
+                    stats: data.stats.map(s => ({
+                        stat: s.stat.name,
+                        base: s.base_stat
+                    }))
+                };
+
+                showPokemon(newPokemon);
+                modal.classList.add("hidden");
+
+                evolutionsDiv.classList.add("hidden");
+                evolutionsDiv.innerHTML = "";
+                toggleBtn.textContent = "Ver Evoluciones";
+            });
+
+            const span = document.createElement("span");
+            span.textContent = capitalize(evo.name);
+
+            card.appendChild(img);
+            card.appendChild(span);
+            evolutionsDiv.appendChild(card);
         });
     };
 }
 
-//operacion del boton modal
+//Botones modal
 const modal = document.getElementById("pokemon-modal");
 const openBtn = document.getElementById("openModal");
 const closeBtn = document.getElementById("close-modal");
@@ -117,7 +167,6 @@ openBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 
-  //Limpiar evoluciones y resetear botón
   const evolutionsDiv = document.getElementById("modal-evolutions");
   const toggleBtn = document.getElementById("toggle-evolutions");
 
