@@ -88,7 +88,7 @@ export function showModal(pokemon){
 
         //Si solo tiene uno, no evoluciona
         if(evolutions.length <= 1){
-            evolutionsDiv.innerHTML = "<p>Este Pokémon no tiene evoluciones 😢</p>";
+            evolutionsDiv.innerHTML = "<p>Este Pokémon no tiene evoluciones </p>";
             return;
         }
 

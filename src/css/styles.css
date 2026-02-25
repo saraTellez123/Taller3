@@ -85,7 +85,6 @@
 
 body{
     display: flex;
-    font-family: sans-serif;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -102,7 +101,6 @@ body{
     box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative; 
-
 }
 .card img{
     width: 130px;
@@ -266,10 +264,16 @@ button:active{
 .modal-evolutions {
     margin-top: 20px;
     text-align: center;
+    width: 100px;
+}
+
+.modal-evolutions p:last-child {
+    grid-column: span 2;
 }
 
 .modal-evolutions h3 {
     margin-bottom: 10px;
+    
 }
 
 .evolution-card {
@@ -281,18 +285,102 @@ button:active{
 .evolution-card img {
     width: 100px;
     border-radius: 50%;
-    border: 3px solid #3f23bb;
+    border: 3px solid #ce0202;
     object-fit: cover;
     transition: transform 0.3s ease;
+    
 }
 
 .evolution-card img:hover {
     transform: scale(1.1);
+    border: 3px solid #ce0202;
 }
+
+#toggle-evolutions{
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: 'VT323', monospace;
+    top: 10px;
+    right: 10px;
+    background: #240808;
+    color: white;    
+    margin: 10px;
+}
+
+#close-modal{
+   position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.modal-content {
+    background: #e9e9e9;
+    width: 350px;
+    padding: 25px;
+    border-radius: 15px;
+    border: 8px solid #ce0202;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+.pokemon-id {
+    color: rgb(0, 0, 0);
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-info p {
+    background: #dcdcdc;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.modal-info p:last-child {
+    grid-column: span 2;
+}
+
+.modal-content img {
+    width: 100%;
+}
+
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#modal-img {
+    width: 180px;
+    margin: 15px 0;
+}
+
 
 .evolution-card span {
     display: block;
     margin-top: 5px;
     font-weight: bold;
-    color: #3f23bb;
+    color: #000000;
 }
+
